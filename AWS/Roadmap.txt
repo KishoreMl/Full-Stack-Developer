@@ -1,0 +1,16 @@
+Roadmap for AWS:-
+
+1. Create AWS Free account
+2. Basics     -> Regions, AZs, implementation (users & roles)
+3. Storage    -> S3 (buckets, upload, permissions)
+4. Compute    -> EC2 (launch server, connect via SSH)
+5. Network    -> VPC, Subnets, Security groups
+6. Database   -> RDS (MySQL/Postgres) Basics
+7. Serverless -> Lambda functions, API Gateway
+8. Monitoring -> CloudWatch (logs, alerts)
+9. Infra      -> CloudFormation/ Terraform
+10. Deploy a sample project end-to-end
+
+
+
+

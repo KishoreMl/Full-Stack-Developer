@@ -1,0 +1,226 @@
+React Concepts
+
+1. Virtual DOM:
+-----------------------------------------------------------------------------------------------------
+
+Virtual DOM is a lightweight JavaScript representation of the real DOM. 
+When a component's state or props change, React creates a new Virtual DOM tree and 
+compares it with the previous one using the reconciliation process.
+React then updates only the changed elements in the real DOM, reducing expensive DOM operations and
+improving application performance.
+
+Why React Uses Virtual DOM ?
+
+Directly updating the real DOM is expensive because every change can trigger:
+
+    - Layout recalculations
+    - Repainting
+    - Reflow operations
+
+To minimize these costly operations, React updates a virtual representation first and 
+then applies only the necessary changes to the real DOM.
+
+
+Example Flow: 
+
+    State Change
+          ↓
+    New Virtual DOM Created
+          ↓
+    Compare with Previous Virtual DOM
+          ↓
+    Find Differences (Diffing)
+          ↓
+    Update Only Changed Nodes
+          ↓
+    Real DOM Updated Efficiently
+
+
+- Reconciliation:
+
+  Reconciliation is React's process of comparing two Virtual DOM trees and determining the minimum set of changes needed.
+
+------------------------------------------------------------------------------------------------------------------------
+
+2. Functional Component:
+
+A Functional Component is a JavaScript function that returns JSX (UI elements). 
+It is the modern and recommended way to create components in React.
+
+Basic Syntax:
+
+    function Welcome() {
+      return <h1>Hello, React!</h1>;
+    }
+
+Usage:
+
+    function App() {
+      return <Welcome />;
+    }
+
+- Functional Component with Props:
+
+Example:
+
+    function Welcome(props) {
+      return <h1>Hello, {props.name}</h1>;
+    }
+
+Usage:
+
+    function App() {
+      return <Welcome name="Kishore" />;
+    }
+
+- Functional Component Lifecycle:
+
+  Functional components don't have lifecycle methods like class components. Instead, Hooks are used.
+
+Class Component	        Functional Component
+
+componentDidMount	      useEffect(() => {}, [])
+componentDidUpdate	      useEffect(() => {})
+componentWillUnmount	  return cleanup function inside useEffect
+
+-------------------------------------------------------------------------------------------------------------
+
+React Hooks:
+
+Hooks are special functions introduced in React 16.8 that allow functional components to use React features 
+such as state, lifecycle methods, context, refs, and performance optimizations without writing class components.
+
+(i) useState
+
+    - used to add state to functional component
+    - Syntax: const [state, setState] = useState(initialValue);
+    - Key points:
+        - update state triggers re-render
+        - State updates are asynchronous
+        - Never mutate state directly 
+           - count = count + 1   => wrong
+           - setCount(count + 1) => correct
+
+(ii) useEffect
+
+   - used for side effects such as
+      - API Calls
+      - Timers
+      - Event listeners
+      - DOM Manipulation
+      - Subscriptions
+    
+    -  Run once  (equivalent to componentDidMount)
+
+        useEffect(() => {
+          console.log("Mounted");
+        }, []);
+
+    - Run on State change  (Equivalent to componentDidUpdate)  
+
+       useEffect(() => {
+          console.log("Count changed");
+        }, [count]);  
+
+    -  CleanUp Function  (Equivalent to componentWillUnmount)
+
+       useEffect(() => {
+          const timer = setInterval(() => {
+            console.log("Running");
+          }, 1000);
+
+          return () => clearInterval(timer);
+        }, []);
+    
+ (iii) useContext
+      
+       - used to access context Data without prop drilling
+
+       - Create context
+
+          import { createContext } from "react";
+          const UserContext = createContext();
+
+       - Provide Context 
+
+          <UserContext.Provider value="Kishore">
+           <Profile />
+          </UserContext.Provider>   
+
+       - Consume context 
+
+         import { useContext } from "react";
+
+         function Profile() {
+           const user = useContext(UserContext);
+         
+           return <h1>{user}</h1>;
+         }  
+
+  (iv) useRef 
+      - used to access DOM elements
+      - Store mutable values without re-rendering
+      - Example:
+       (i) Access DOM element
+
+           import { useRef } from "react";
+     
+           function InputFocus() {
+             const inputRef = useRef();
+           
+             const focusInput = () => {
+               inputRef.current.focus();
+             };
+           
+             return (
+               <>
+                 <input ref={inputRef} />
+                 <button onClick={focusInput}>
+                   Focus
+                 </button>
+               </>
+             );
+           }    
+
+        (ii) Store Mutable values
+
+             const renderCount = useRef(0);
+             renderCount.current++;   //updating current does not trigger re-trigger
+
+    (v) useMemo
+
+        - Used to memoize expensive calculations.
+        - Without useMemo
+           const result = expensiveCalculation(num); // calculation runs on every render
+        - with useMemo
+            const result = useMemo(() => {
+              return expensiveCalculation(num);
+            }, [num]);   
+         
+    (vi) useCallback
+
+    (vii) useReducer
+
+    (viii) useLayoutEffect
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+State Managements:
+
+- Redux:
+
+
+Code Splitting:
+
+How Components are rendered in the browser:
+
+> Component Definition
+> JSX to React.createElement
+> Reconcilation and Diffing
+> DOM Updates via ReactDOM
+> Browser paint
+> Re-render props on State and props change
+
+
+
+

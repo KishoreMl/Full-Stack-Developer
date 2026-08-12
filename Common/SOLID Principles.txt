@@ -1,0 +1,222 @@
+SOLID Principles:
+
+1. Single Responsibility Principle
+2. Open/Closed Principle
+3. Liskov's Substitution Principle
+4. Interface Segregation Principle
+5. Dependency Inversion Principle
+
+
+Single Responsibilty Principle:
+
+    - A class should have only one reason to change.
+    - A class should have only single purpose or Responsibilty.
+
+    - Bad Example: 
+
+        class UserService {
+                public void saveUser(User user) {
+                    // Save user to DB
+                }
+
+                public void sendEmail(User user) {
+                    // Send welcome email
+                }
+
+                public void generateReport() {
+                    // Generate report
+                }
+        }
+
+    This class has 3 responsibilities:
+        - User management
+        - Email sending
+        - Report generation
+
+    Good Example:
+
+        class UserService {
+                public void saveUser(User user) {
+                    // Save user
+                }
+            }
+
+            class EmailService {
+                public void sendEmail(User user) {
+                    // Send email
+                }
+            }
+
+            class ReportService {
+                public void generateReport() {
+                    // Generate report
+                }
+            }    
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Open/Closed Principle:
+
+    - A Class should be open for extension but closed for modification.
+    - You should be able to add new functionality without modifying existing code.
+    
+    Bad Example: 
+
+        class DiscountCalculator {
+
+            double calculate(String customerType) {
+                if(customerType.equals("REGULAR"))
+                    return 10;
+                if(customerType.equals("PREMIUM"))
+                    return 20;
+
+                return 0;
+            }
+        }
+
+    - Adding a new customer type means modifying existing code.
+
+    Good Example:
+
+        interface DiscountStrategy {
+            double getDiscount();
+        }
+
+        class RegularCustomer implements DiscountStrategy {
+            public double getDiscount() {
+                return 10;
+            }
+        }
+
+        class PremiumCustomer implements DiscountStrategy {
+            public double getDiscount() {
+                return 20;
+            }
+        }
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Liskov's Substitution Principle:
+
+    - This principle “Derived or child classes must be substitutable for their base or parent classes“. 
+    - Any class that is the child of a parent class should be usable in place of its parent without any unexpected behavior.
+    
+    Bad Example: 
+
+    class Bird {
+        void fly() {}
+    }
+
+    class Penguin extends Bird {
+        void fly() {
+            throw new UnsupportedOperationException();
+        }
+    }
+
+    // Penguin is a bird that canot fly. This breaks expectations
+
+    Good Example:
+
+        class Bird {}
+
+        interface Flyable {
+            void fly();
+        }
+
+        class Sparrow extends Bird implements Flyable {
+            public void fly() {}
+        }
+
+        class Penguin extends Bird {}
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Interface Segregation Principle:
+
+    - Do not force any client to implement an interface which is irrelevant to them
+    - You should prefer many client interfaces rather than one general interface and each interface should have a specific responsibility.
+
+    Bad Example:
+
+        interface Worker {
+            void work();
+            void eat();
+        }
+        
+        // Robot Workers do not eat
+        class Robot implements Worker {
+            public void work() {}
+
+            public void eat() {
+                throw new UnsupportedOperationException();
+            }
+        }
+
+    Good Example:
+
+        interface Workable {
+            void work();
+        }
+
+        interface Eatable {
+            void eat();
+        }
+
+        class Human implements Workable, Eatable {}
+
+        class Robot implements Workable {}
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Dependency Inversion Principle:
+
+    -  “High-level modules should not depend on low-level modules. Both should depend on abstractions“. 
+    -  Depend on abstractions, not concrete implementations.
+
+    - Bad Example
+    
+        class MySQLDatabase {
+            void save() {}
+        }
+
+        class UserService {
+            private MySQLDatabase db = new MySQLDatabase();
+        }
+
+        // User Service is tightly coupled to MySql services
+
+    - Good Example 
+
+        interface Database {
+            void save();
+        }
+
+        class MySQLDatabase implements Database {
+            public void save() {}
+        }
+
+        class PostgreSQLDatabase implements Database {
+            public void save() {}
+        }
+
+        class UserService {
+            private Database db;
+
+            UserService(Database db) {
+                this.db = db;
+            }
+        }
+
+        new UserService(new MySQLDatabase());
+        new UserService(new PostgreSQLDatabase());
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+SRP → One component/hook = one job.
+OCP → Add new features via extension, not by editing existing logic.
+LSP → Any derived component/service should behave as expected when used in place of its base type.
+ISP → Small, focused prop interfaces and APIs.
+DIP → Inject services and API clients rather than hard-coding them.
+
+

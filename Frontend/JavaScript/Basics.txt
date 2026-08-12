@@ -1,0 +1,70 @@
+1. var, let, const
+
+    var can be accessed outside the block where as let const cannot be accessed.
+
+    if (true) {
+        var x = 10; // Accessible outside this block
+        let y = 20; // Block-scoped
+        const z = 30; //Block-scoped
+    }
+    console.log(x); // 10
+    console.log(y); // ReferenceError: y is not defined
+    console.log(z); // ReferenceError: z is not defined
+
+    Variables declared with var are hoisted to the top of their scope, meaning they can be used before their declaration,
+    though their value will be undefined until the declaration is reached.
+
+    console.log(a); // undefined (hoisted)
+    var a = 5;
+
+    console.log(b); // ReferenceError: Cannot access 'b' before initialization
+    let b = 10;
+
+    console.log(c); // ReferenceError: Cannot access 'c' before initialization
+    const c = 10;
+
+    var: Can be re-declared within the same scope without error.
+    let: Cannot be re-declared in the same scope.
+
+    var c = 1;
+    var c = 2; // Allowed
+
+    let d = 1;
+    let d = 2; // SyntaxError: Identifier 'd' has already been declared
+
+
+2. for Loops
+
+      Use for...in when working with objects and you need to iterate over property names.
+      Use for...of when working with arrays, strings, or any iterable, and you want to iterate over values.
+
+      const person = { name: "Alice", age: 25, city: "New York" };
+
+      for (let key in person) {
+        console.log(`${key}: ${person[key]}`);
+      }
+
+      const arr = [10, 20, 30];
+
+      for (let index in arr) {
+        console.log(index); // Logs the indexes: 0, 1, 2
+        console.log(arr[index]); // Logs the values: 10, 20, 30
+      }
+
+      const arr = [10, 20, 30];
+
+      for (let value of arr) {
+        console.log(value); // Logs: 10, 20, 30
+      }
+
+
+
+
+
+
+
+  
+
+
+
+

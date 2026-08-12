@@ -1,0 +1,49 @@
+What is Browser Paint?
+
+Browser paint (or just "paint") is a step in the **browser rendering process** where the browser **draws pixels to the screen** based on the current state of the DOM, styles, and layout.
+
+
+The Rendering Pipeline (simplified):
+--------------------------------------------------------------------------------------------------
+
+1. JavaScript Execution
+   Runs your code — modifies DOM, adds styles, etc.
+
+2. Style Calculation
+   Figures out what styles apply to each DOM element.
+
+3. Layout (Reflow)
+   Determines the size and position of elements on the page.
+
+4. Paint
+   Converts individual elements (text, borders, backgrounds) into actual **pixels** on the screen.
+
+5. Composite
+   Combines all painted layers and renders them on the screen (final visual output).
+
+----------------------------------------------------------------------------------------------------
+
+When does paint happen?
+
+After layout is finished, and before anything appears on screen. It happens every time something visually changes like:
+
+* DOM element styles change
+* Text content updates
+* Images load
+* Scroll happens
+
+In React terms:
+
+> useLayoutEffect() runs before paint (blocks painting until it finishes).
+> useEffect() runs after paint (non-blocking, safer for side effects like API calls).
+
+ Why does this matter?
+
+> Blocking paint delays visual feedback and hurts perceived performance.
+> That’s why React encourages using `useEffect()` for most tasks and `useLayoutEffect()` only when absolutely necessary (e.g., measuring layout).
+
+
+Visual Analogy:
+
+> Think of paint like a **painter drawing your webpage on a canvas**.
+> JavaScript tells what to paint → layout tells **where to paint** → paint is the **actual brush stroke** on screen.

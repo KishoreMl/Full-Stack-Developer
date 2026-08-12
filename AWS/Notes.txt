@@ -1,0 +1,296 @@
+
+Cloud Migration Strategies
+
+* Storage Migration variables:
+    - Cost
+    - Time
+    - Downtime
+    - Tools
+    - security
+
+* Snowball appliances
+
+Schema Converstion Tools 
+
+**Cloud Migration Strategies**
+
+1. Rehost 
+    Lift and shift, migrate to VMs in the CSP with few changes. This is easiest migration startegy.
+    But does not reduce operational overhead.
+
+2. Replatform
+    Migrate from VM to Paas to reduce overhead, still few changes. Don't change anything more than 
+    necessary, while reducing overhead.
+
+3. Repurchase    
+    Often combine with retiring, requires switching to new software, usually a new SaaS. 
+    This implies lot of changes.
+
+4. Refactor
+    Re-architect to be cloud native. This may be the most effective long-term stargtegy but implies 
+    lot of changes.
+
+5. Retire 
+    Stop using the app entirely rather than migrating it.    
+
+
+4. Cloud Economics
+
+* Total cost of ownership
+
+    * Capital Expenditure  (CapEx)  (On premises)
+      - Up front payment
+      - Maintance contracts
+      - Amortize value over time
+      - Own the product
+      - Predictable cost 
+
+    * Operational Expenditure  (OpEx) (On-demand)
+      - Subscriptions
+      - Pay as you go 
+      - Operations have their own cost
+      - Variable and often unpredictable
+
+    * Cloud Economic principles
+
+      * Pay as you go
+        - Adapt to changing business needs
+        - Stop wasting time on forecasting
+        - No need to overprovision
+
+      * Save when you commit 
+        - Reservations
+        - Savings plan 
+        - 1 or 3 year commitments
+
+      * Pay less by using more
+        - Volume based discounts
+        - Tiered pricing 
+        - Mostly storage & network traffic      
+
+    * On premises (Keep the lights on) KTLO Operation
+        - Maintaning the data center, monitoring power & temparatures
+        - OS update 
+        - user account management
+        - disk space management
+        - Trouble shooting disk & memory errors
+        - frimware updates, more complicate licensing
+
+
+    * Cloud cost benefits    
+
+        * Cost Optmization Storage Solutions
+          - optimized access cost   (EBS, EFS, FSx)
+          - optimized storage cost  (S3, Simple storage service glacier)
+          - optimized elasticity    (EFS, S3)
+
+        * Cost Optimized Compute Solutions
+          - optimized predictable cost (EC2 reserved instances, Compute savings plan for Fargate, Savings plan)  
+          - optimized temporary cost   (EC2 on-demand instances, Spot instances)
+          - optimized flexiblity       (EC2 on-demand instances, Spot instances)
+
+        * Cost Optimized Database Solutions
+          - optimized predictable cost   (RDS Reserved Inst,. DynamoDB Reservations, Redshift reserved nodes)
+          - optimized temporary cost     (DynamoDB on-demand, Aurora Services, Redshift concurrency scaling)
+          - optimized storage elasticity (DynamoDB, Redshift Spectrum)
+        
+        * Cost Optimized Network Architectures
+          - optimized same region cost   (internet gateway, peering connection)
+          - optimized cross region cost  (peering connection, AWS Transit Gateway)
+          - optimized on-premises cost   (AWS Direct connect, AWS Storage Gateway)
+
+
+5. Cloud Architecture & Design principles
+
+   (i) Design principles
+     - Stop guessing capacity needs
+     - Test systems at production scale
+     - Automate to make Architectural experiment
+     - Allow for evolutionary Architectures
+     - Drive architectures using data
+     - Improve throught game days
+
+   (ii) Well-Architectured Framework Pillars
+     - Operational Excellence 
+     - Performance efficiency  
+     - Security
+     - Reliability
+     - Cost optimization 
+     - Sustainability
+
+        (i) Operational Excellence
+          - Perform oprations as code
+          - Annotated documentation
+          - Make frequent, small, reversible changes
+          - Refine operations procedures frequently 
+          - Anticipate failure
+          - Learn from all operational failures 
+
+        (ii) Performance Efficiency
+            - Democartive advanced technologies
+            - Go global in minutes
+            - use serverless architectures
+            - Experiment more often
+            - Mechanical sympathy
+
+        (iii) Security
+            - Implement a strong identity foundation
+            - Enable traceability 
+            - Apply security at all layers
+            - Automate security best practices
+            - protect data in transit and at rest 
+            - keep people away from data
+            - prepare for security events
+
+         (iv) Reliability
+            - Test recovery procedures
+            - Automatically recover from failure
+            - Scale horizontally to increase aggregate system availablity
+            - Stop guesing capacity 
+            - Manage chain in automation 
+
+         (v) Cost optimization
+            - Adopt consumption model
+            - Measure overall efficiency
+            - Analyze and attribute Expenditure
+            - Use managed services to reduce cost of ownership 
+
+         (vi) Sustainability
+            - Understand your impact
+            - Establish Sustainability goals
+            - Maximize utilization 
+            - Use managed services
+            - Reduce downstream impact of your cloud workloads
+
+    
+6. Security and Compilance
+
+  (i) AWS Responsibility
+    - OS, Network, Firewall configuration
+    - Platform and application management 
+    - Compute, Storage, database, network
+    - Hardware and AWS Global infrastructure
+
+  (ii) Customer Responsibility
+    - Customer Data
+    - Server side encryption
+    - Client-side data encryption and intergrity
+    - Network traffic protection
+    - Platform and application management 
+
+
+7. Cloud Security, Governance and Compilance concepts   
+
+   7.1 Complilance Information
+
+      (i) Portals
+        - https://aws.amazon.com/compilance/
+        - https://aws.amazon.com/compilance/services-in-scope/
+        - https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/compilance-validation.html
+
+      (ii) Whitepapers
+        - Amazon Web Services: Risk and compilance
+        - Navigating GDPR Compilance on AWS
+        - Data Residency: AWS Policy Perspective
+        - Data Classification
+
+      (iii) Compliance Programs
+        - SOC
+        - PCI 
+        - FedRamp
+        - HIPAA
+        - FINMA
+
+    7.2 Governance and Compilance Strategies
+        - What keys are involved?
+        - Who owns the keys?
+        - Where is the encryption performed?
+        - How is key access control implemented?
+        - Who enables encryption?        
+  
+    7.3 Auditing and Reporting
+        - Cloudwatch Logs
+        - Config
+        - Cloud Trail
+
+    7.4 Least Privilege Concepts and Strategies
+        (i) Role Based access Control (Access based on identity)
+            - Direct attached policies
+            - Group membership
+            - Instance profiles
+            - Federated Identities
+
+        (ii) Attribute Based access control  (Access based on properties)
+            - Principle tags
+            - Resource tags
+            - Request properties
+            - Policy conditions
+
+      7.5 AWS Security services
+          
+          (i) IAM Access Analyzer
+              - Discovers cross-account access permissions
+              - Supports both identity and resource permissions
+              
+          (ii) AWS Config
+              - identifies resource associations
+              - Visualizes resource changes as timelines
+              - Create rules to identify non-compilant resources
+              - supports proactive and reactive mitigation
+
+          (iii) Amazon Macie 
+              - Classifies data
+              - Identifies sensitive data according to data privacy frameworks
+              - Analyzes data access permissions
+
+          (iv) Amazon GuardDuty
+              - Protects AWS workloads, credentials, and Data
+              - Ingests from several event and data sources
+
+          (v) Amazon Inspector
+              - Discover and scan AWS workloads for software vulnerablities
+              - scans for unintended network exposure
+
+          (vi) AWS Security Hub
+            - All the above 5 service are inputs for this Security Hub
+            - view centralized security dashboards
+            - implement controls in various security standards
+            - Automates security checks
+            - Implements checks from several standards
+
+              - Security Hub standards
+                - AWS Foundational Security best practices 
+                - CIS AWS Foundations Benchmark
+                - NIST Special Piblication 800-53
+                - PCI DSS
+
+          (vii) Amazon Detective  
+               - Integrates with secuirty Hub
+               - Organizes security data into a graph model
+
+          (viii) AWS Audit manageer
+              - Integrates with security Hub
+              - Oragnizes findings and evidence 
+              - Creates reports for specific compilance frameworks
+
+          (ix) AWS Artifact
+              - Enabled by default per account 
+              - Provides auditor-issued reports on AWS securtiy and compilance
+              - Discover certifications, attestations, accreditations in one location
+
+          (x) AWS Sheild  
+              - Provides managed DDoS protection
+              - Layers 3-4 (standard)
+              - Layers 3-7 (advanced)
+              - Visibility and attack notification (advanced)
+              - Specialized support  (advanced)
+              - DDoS cost protection
+
+                - Sheild Adavanced Supported resources
+                   - AWS WAF
+                   - AWS Firewall manager
+                   - Amazon Cloudfront
+                   - AWS Route 53
+                   - AWS Global Accelarator
+                   - Elastic load balancing
+                   - Elastic IP Address          

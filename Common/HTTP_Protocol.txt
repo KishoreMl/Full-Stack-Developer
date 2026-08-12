@@ -1,0 +1,148 @@
+Hyper Text Transfer Protocol:
+
+    HTTP (Hyper Text Transfer Protocol) is network protocol that defines how client communicates with 
+    server by sending request and responses. 
+
+    - HTTP is a stateless, meaning each request is independent
+    - The Server doesn't remember previous Requests
+    - To maintain login sessions, applications use 
+        - cookies
+        - Session IDs 
+        - JWT Token 
+        - OAuth Tokens 
+
+HTTP Request Structure:
+
+    - Method 
+    - URL 
+    - Headers
+    - Body   (Optional)
+
+HTTP Methods:
+
+    - GET 
+    - POST 
+    - PUT     (Update entire resource)
+    - PATCH   (Update only specific fields)
+    - DELETE 
+    - HEAD     (Same as GET, but returns only headers)
+    - OPTIONS  (Returns supported methods)  
+
+HTTP Status Codes:
+
+    - 1xx Information
+    - 2xx Success
+    - 3xx Redirection
+    - 4xx Client Error
+    - 5xx Server Error
+
+1xx:    // Rarely used in frontend 
+    - 100  : Continue 
+    - 101  : Switching Protocols 
+
+2xx:  
+    - 200  : OK         - Everything succeeded, for GET calls 
+    - 201  : Created    - New resource created 
+    - 202  : Accepted   - Request accepted for asynchronous processing 
+    - 204  : No Content - successful request with no response body 
+
+3xx:
+    - 301  : Moved permanently
+    - 302  : Found
+    - 304  : Not Modified 
+
+4xx: 
+    - 400  : Bad Request            - Invalid input 
+    - 401  : Unauthorized           - Missing or expired JWT Token 
+    - 403  : Forbidden              - Authenticated but not allowed 
+    - 404  : Not found              - Resource doesn't exist
+    - 405  : Method not allowed     - Wrong method used
+    - 409  : Conflict               - Resource conflict 
+    - 415  : Unsupported media Type - Wrong Content-Type
+    - 422  : Unprocessable Entity   - Request format is valid, but data violates business rules
+    - 429  : Too Many Requests      - Rate limit exceeded
+
+5xx: 
+    - 500  : Internal Server error  - Unexpected server failure
+    - 501  : Not Implemented        - Requested functionality isn't supported by the server.
+    - 502  : Bad Gateway            - A gateway or proxy received an invalid response from an upstream server
+    - 503  : Service unavailable    - Server temporarily unavailable (due to maintenance or high traffic)
+    - 504  : Gateway Timeout        - UpStream server took too long to respond
+
+
+Common HTTP Headers:
+
+    Request Headers:
+
+        - Authorization 
+            - used to send Authentication credentials
+            - Value : Bearer token       
+           
+        - Content-Type 
+            - tells the server what format the request body is in 
+            - Values: application/json, text/plain, text/html
+            
+        - Accept 
+            - tells the server what format the reponse should be
+            - Values: application/json   
+            
+        - User-Agent 
+            - Identifies the client software making the request
+            - The browser automatically sends a User-Agent header
+            - It can provide information about 
+                - Browser 
+                - Browser version 
+                - Operating system 
+                - Device characteristics  
+            - Values : Mozilla/5.0 (Windows NT 10.0; Win64; x64)            
+
+        - Cache-Control
+            - Controls how caching should be handled
+            - Values : no-cache 
+            - The cached response must be revalidated with the server before being reused.
+
+        Easy ways to remember:
+
+        - Authorization : Here is my authentication token   
+        - Content-Type  : The data im sending to you is JSON 
+        - Accept        : I want the response as JSON
+        - Cache-Control : Don't blindly reuse a cached response; follow the caching rules  
+        - User Agent    : I'm a browser/client with this software and platform information
+
+    Response Headers:
+
+        - Content-Type
+            - tells the client what format the response body is in
+            - Value : application/json, text/plain, application/pdf, image/png
+
+        - Content-Length
+            - Specifies the size of the response body in bytes
+            - Value : 120 
+
+        - Set-Cookie
+            - Tells the browser to create or update a cookie.
+            - Value : sessionId=abc123
+
+        - Cache-Control
+            - Controls how the response can be cached.
+            - Value : max-age=3600
+            - This response can be considered fresh for 3600 seconds
+            - You can reuse this cached response while it is fresh for up to 3600 seconds
+
+        - Access-Control-Allow-Origin
+            - This is related to CORS (Cross-Origin Resource Sharing).
+            - It tells the browser which origin is allowed to access the response from a cross-origin request.
+            - origin = Protocol + Domain + Port (https://example.com:443)
+
+        Easy ways to remember:
+
+            - Content-Type                :  What did I return?
+            - Content-Length              :  How much data did I return?
+            - Set-Cookie                  :  Store/update this cookie
+            - Cache-Control               :  How should you cache this response?
+            - Access-Control-Allow-Origin :  Which origin can access this response?    
+
+
+
+
+

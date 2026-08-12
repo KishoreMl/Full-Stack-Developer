@@ -1,0 +1,129 @@
+DSA:
+    - Arrays & Strings                 :
+    - Linked Lists                     :
+    - Stacks & Queues                  : 
+    - Hashing                          :
+    - Trees (Binary, BST, AVL, Heap)   :
+    - Graphs                           :
+    - DFS, BFS, Dijkstra, Kruskal      :
+
+------------------------------------------------------------------------------------------
+
+Frontend:
+
+    Common:
+
+        - Browser API        : Done 
+        - Browser Storage    : Partial 
+        - CORS               : 
+        - Authentication     : Partial 
+        - Authorization      : Partial
+        - JWT                : Done 
+        - OAuth              : 
+        - REST API           : Partial
+        - HTTP Protocol      : Done 
+        - Web Sockets        : 
+        - Dedouncing         : Done 
+        - Throtlling         : Done 
+        - Browser Caching    : 
+        - Service Worker     : 
+        - PWA                :
+
+    JavaScript:
+        - Promises           : 
+        - async/await        :
+        - Scope & Closures   :
+        - this Keyword       :
+        - bind               :
+        - Arrow funtions     : 
+
+    React JS:
+        - React Lifecycle                     :
+        - Virtual DOM                         :
+        - Reconcilation                       :
+        - Fibre Architecture (High Level)     :
+        - State Management                    :
+        - Class Component vs Func Component   :
+        - Hooks                               :
+        - Redux                               :
+        - Thunk                               :
+        - Routing                             :
+        - Lazy Loading                        :
+        - Pagination                          :
+        - Virtualization                      :
+        - Code Spliting                       :
+
+    Build Tools:
+        - vite      :
+        - webpack   :
+        - Babel     : 
+  
+---------------------------------------------------------------------------------------------------------------------------------
+
+Backend:
+
+    Common:
+        - SOLID Principles      : Done
+
+    Java:
+        - JVM, JDK, JRE         :
+        - JIT Compiler          :
+        - Garbage Collector     :
+        - OOPS Concept          :
+        - String Builder        :
+        - String Buffer         :
+        - Collections           :
+        - Exception handlings   :
+        - Multi Threading       :
+        - Immutable Objects     :
+        - Comparable            :
+        - Comparator            :
+
+    SpringBoot:
+        - Dependency Injection  :
+        - Bean Lifecycle        : 
+        - Spring MVC            :
+        - REST Controllers      :
+        - Validation            :
+        - JPA                   :
+        - Exception Handling    : 
+        - Logging               :
+        - Scheduling            :
+
+    Caching:
+        - Redis                :
+        - TTL                  :
+        - Distributed Cache    :
+
+    Database:
+        - Group By             :
+        - Having               :
+        - Stored procedures    :
+        - Normalization        :
+        - ACID properties      : 
+        - Transactions         :
+        - Joins                : 
+        - Indexing             :
+        - Query Optimization   :
+
+---------------------------------------------------------------------------------------------------------------------------------------------------
+
+Cloud: 
+    AWS:
+        - Lambda Functions      :
+        - SNS                   :
+        - SQS                   :
+        - ECS                   :
+        - S3                    :
+        - Load Balancer         :
+        - VPC                   :
+        - Cloud Front           :
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+AI & Gen AI
+
+
+
+

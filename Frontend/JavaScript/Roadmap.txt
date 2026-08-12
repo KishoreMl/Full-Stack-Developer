@@ -1,0 +1,146 @@
+
+Phase 1: JavaScript Fundamentals/ Basics
+
+1.Core Syntax
+    - Variables: `var`, `let`, `const`
+    - Data types: String, Number, Boolean, `null`, `undefined`, Symbol
+    - Operators (arithmetic, logical, comparison)
+    - Type coercion
+
+2. Control Flow
+    - if / else
+    - switch
+    - Loops: for, while, do-while
+    - break, continue
+
+3. Functions
+    - Function declaration vs expression
+    - Arrow functions
+    - Parameters & return values
+    - Default parameters
+
+-------------------------------------------------------------------------------------------------------------------
+
+Phase 2: Working with Data & Logic
+
+1. Arrays
+    - map, filter, reduce
+    - forEach, find, some, every
+    - Spread operator (`...`)
+
+2. Objects
+    - Object creation
+    - Accessing properties
+    - Object methods
+    - `this` keyword
+
+3. Strings & Numbers
+    - String methods (`split`, `includes`, `replace`)
+    - Math functions
+    - Date object
+
+
+-------------------------------------------------------------------------------------------------------------------
+
+Phase 3: JavaScript in the Browser (DOM)
+
+1. DOM Manipulation
+    - querySelector, getElementById
+    - classList
+    - Creating/removing elements
+
+2. Events
+    - Event listeners
+    - Event bubbling & capturing
+    - preventDefault, stopPropagation
+
+3. Forms
+    -  Input handling
+    -  Validation
+    -  Error messages
+
+-------------------------------------------------------------------------------------------------------------------
+
+Phase 4: Advanced JavaScript 
+
+1. Scope & Closures
+    - Global vs local scope
+    - Block scope
+    - Closures (🔥 frequently asked in interviews)
+
+2. Hoisting
+    -  Variables & functions
+    -  `let` vs `var`
+
+3. Asynchronous JavaScript
+    -  Callbacks
+    -  Promises
+    -  async / await
+    -  setTimeout, setInterval
+
+4. Error Handling
+    - try, catch
+    - Custom errors
+
+----------------------------------------------------------------------------------------------------------------------
+
+Phase 5: ES6+ (Modern JavaScript)
+
+    - Destructuring
+    - Template literals
+    - Modules (`import / export`)
+    - Optional chaining (`?.`)
+    - Nullish coalescing (`??`)
+
+-------------------------------------------------------------------------------------------------------------------
+
+Phase 6: Deep JavaScript 
+
+1. Execution Context
+    - Call stack
+    - Memory heap
+
+2. Event Loop
+    - Microtasks vs Macrotasks
+
+3. `this` keyword (deep dive)
+
+    -`call`, `apply`, `bind`
+
+4. Prototypes & Inheritance
+
+    - Prototype chain
+    - ES6 classes
+
+Practice:
+    - Custom utility library
+    - Polyfills for array methods
+
+----------------------------------------------------------------------------------------------------------------------
+
+Phase 7: JavaScript Ecosystem
+
+1. Browser APIs
+    - Fetch API
+    - LocalStorage / SessionStorage
+    - Web APIs
+
+2. Tooling
+    - NPM / Yarn
+    - Vite / Webpack
+    - Babel
+
+3. Testing
+    - Unit testing (Jest)
+    - Basic debugging techniques
+
+----------------------------------------------------------------------------------------------------------------------
+
+## Additional Concepts
+
+* Closures
+* Async JS
+* Event loop
+* Array/object immutability
+* Performance patterns
+

@@ -1,0 +1,86 @@
+ Spring: 
+    - Spring Boot
+    - Spring Framework
+    - Spring Batch
+    - Spring Integration
+    - Spring Data
+    - Spring Security
+    - Spring Cloud
+    - Spring shell
+
+Pre-requiste: 
+    - Install latest JDK 
+    - Install Build Tools (Maven, Gradle)
+    - Install IDE IntelliJ or Eclipse or VS Code
+
+Project Structure:
+
+  /Project Name
+    - /.idea  (IntelliJ config files)
+    - /.mvn   (Maven config files)
+    - /src
+        - /main
+            - /java       (contains java files)
+            - /resources  (contains non-java files)
+        - /test 
+    - gitattributes
+    - gitignore
+    - mvnw     (Script file downloads version of maven specificed in the config)
+    - mvncmd 
+    - pom.xml  (Project Object Model - contains config of Project & its dependencies)
+
+
+Dependencies:
+    - tomcat
+    - web
+    - webmvc
+    - jackson
+    - logging
+
+    - spring-boot-starter-web (contains all of the above packages)
+
+    - Dependencies are configured in the pom.xml file for maven projects
+
+Spring MVC:
+    - Model      (Data & Logic)
+    - View       (What user sees or what is finally returned)
+    - Controller (Mediator Between Model & View)  
+
+
+Controller Example:
+
+    import org.springframework.web.bind
+
+    @Controller                   
+    public class HomeController{
+
+        @RequestMapping("/")
+        public String index(){
+            return "Hello World";
+        }
+    }
+
+
+Run the Application:
+    - ./mvnw spring-boot:run
+
+
+Dependency Injection:
+
+- Bean is Regular Java Object that is managed by Spring.
+
+
+Inversion of Control:
+
+
+Annotations:
+
+@Component
+
+@Service    - Classes that contain business Logic
+
+@Repository - Classes that interact with the Database
+
+@Controller - Classes handling web requests 
+
+@Autowired  - 

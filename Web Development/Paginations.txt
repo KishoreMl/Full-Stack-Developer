@@ -1,0 +1,32 @@
+There are several common types of pagination used in web applications and APIs:
+
+1. Offset-based Pagination
+
+    Uses parameters like offset and limit (or page and pageSize) to fetch a specific slice of data.
+    Example: GET /items?offset=20&limit=10
+    Simple to implement but can be inefficient for large datasets.
+
+2. Cursor-based Pagination (Keyset Pagination)
+
+    Uses a unique identifier (cursor) from the last item of the previous page to fetch the next set.
+    Example: GET /items?after=abc123&limit=10
+    More efficient for large or frequently changing datasets; avoids issues with data shifting.
+
+3. Page-based Pagination
+
+    Uses page numbers and page size.
+    Example: GET /items?page=3&pageSize=10
+    Easy for users to understand but can have consistency issues if data changes between requests.
+
+4. Infinite Scroll (Load More)
+
+    Loads more data as the user scrolls, often using offset or cursor under the hood.
+    Provides a seamless user experience but can be harder to bookmark or share.
+
+5. Relay-style Pagination
+
+    Used in GraphQL, combines cursor-based pagination with first, last, before, and after parameters.
+    Example: GET /items?first=10&after=abc123
+
+
+    

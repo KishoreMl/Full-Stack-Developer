@@ -1,0 +1,180 @@
+Browser APIs:
+
+    Browser APIs are built in interfaces provided by web browsers, that let JavaScript interact with browser & users device.
+
+    Common Browser APIs:
+
+    - DOM API 
+    - Fetch API
+    - Web Storage API / Local Storage API
+    - Canvas API 
+    - Notification API 
+    - GeoLocation API 
+    - Timer API 
+
+1. DOM API 
+
+    Selecting Elements:
+        - document.getElementById("title")
+        - document.getElementsByClassName("item")
+        - document.getElementsByTagName("div")
+        - document.querySelector(".btn")          // Returns the fisrt Element
+        - document.querySelectorAll(".btn")       // Returns all the element   
+
+    Creating Elements:
+        - document.createElement("div")  
+        - document.createTextNode("Hello")
+        - document.createDocumentFragment()
+
+    Adding Elements:
+        - appendChild()   
+        - append()
+        - prepend()
+        - insertBefore()  
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+2. Fetch API 
+
+    - Used to Make HTTP Requests from javaScript. 
+
+    Syntax:
+
+    (i) fetch(url, {
+                method: "GET",
+                headers: {},
+                body: JSON.stringify(data),
+                credentials: "include"
+            });
+
+        - url          - Endpoint to call                    (Type : string)
+        - headers      - HTTP Headers                        (Type : object)
+        - method       - HTTP Method                         (Type : string)
+        - body         - data to send (for POST/PUT/PATCH)   (Type : json)
+        - credentials  - include cookies/authentication      
+        - signal       - Abort request using AbortController  
+
+    (i) fetch(url, options)
+            .then(response => response.json())
+            .then(data => console.log(data))
+            .catch(error => console.error(error));
+
+    (ii)   async function getUsers() {
+            try {
+                    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+                    const users = await response.json();
+                    console.log(users);
+                } catch (error) {
+                    console.error(error);
+                }
+            } 
+
+    Examples:
+
+    POST Request:
+
+        const newUser = {
+            name: "Kishore",
+            age: 25
+        };
+
+        fetch("https://jsonplaceholder.typicode.com/users", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(newUser)
+        }); 
+
+
+    Sending Headers:  
+     
+            fetch(url, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                }
+            }); 
+
+
+    Response Structure of Fetch:
+
+        const response = await fetch(url);
+
+        console.log(response.status);
+        console.log(response.ok);
+        console.log(response.headers);
+        console.log(response.url);     
+
+        - status        : HTTP status code (200,404, etc.,)
+        - ok            : true for status codes 200-299
+        - headers       : Response headers 
+        - url           : Final Url after Redirects 
+        - redirected    : Whether the request was redirected   
+
+    Parsing the Response Body:
+
+        - Choose the method based on the content type 
+
+        - const data = await response.json()
+        - const text = await response.text()
+        - const blob = await response.blob()
+        - const arrayBuffer = await response.arrayBuffer()
+        - const formData    = await response.formData()    
+
+    Abort a request:
+
+        const controller = new AbortController();
+
+        fetch(url, {
+            signal: controller.signal
+        });
+
+        controller.abort();   
+
+    Notes: 
+        - Fetch is Asynchronous, it returns a Promise 
+        - Fetch does not reject on 404 or 500, it resolves suucessfully. But response.ok will be false.
+        - The response body is a stream. Calling response.json() reads the stream and parses into json.
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+3. Local Storage API 
+
+    - localStorage.setItem(key, value)  : Store a key-value pair
+    - localStorage.getItem(key)	        : Retrieve a value by key
+    - localStorage.removeItem(key)	    : Remove a specific key
+    - localStorage.clear()	            : Remove all stored items
+    - localStorage.key(index)	        : Get the key at a specific index
+    - localStorage.length	            : Get the number of stored items
+
+
+    Notes:
+        - Local Storage does not store Objects, use JSON.Stringfy() to save them, JSON.parse() to read them.
+        - Local Storage is Synchronous, Large amount of read & write operations can block the Main Thread 
+        - Local Storage is not Secure, any Java Script running on the page can access it. 
+        - Use it for non-sensitive client side datas 
+        - use when 
+             - user preferences
+             - UI Settings
+             - Recently viewwd items 
+             - Cached API Responses 
+        - Dont use
+            - Passwords 
+            - sensitive data 
+            - Large files & Large Datasets
+
+        - Storage limit 
+            - localStorage  - 5-10 MB,
+            - SessionStorge - 5 MB
+
+
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Timer API 
+
+    
+     
+
+     

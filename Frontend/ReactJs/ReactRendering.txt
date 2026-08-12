@@ -1,0 +1,8 @@
+How Components are rendered in the browser:
+
+> Component Definition
+> JSX to React.createElement
+> Reconcilation and Diffing
+> DOM Updates via ReactDOM
+> Browser paint
+> Re-render props on State and props change

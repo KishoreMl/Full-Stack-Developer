@@ -1,0 +1,75 @@
+Json Web Token  (JWT):
+
+    - An URL Safe token format used to transmit information between two applications.
+    - Used for Authentication & Authorization.
+
+Structure of JWT:    
+
+    JWT consists of three parts separated by dots.
+      - Header
+      - Payload 
+      - Signature
+
+     - JWT Tokens are Base64URL encoded not encrypted. so anyone with the token can decode it.
+     - Dont not put passwords, API Keys, or sensitive data in JWT payload. 
+
+    Header:
+        - Contains information about the token type and signing algorithm.
+        Example:
+            {
+                "alg": "HS256",   // Signing algorithm
+                "typ": "JWT"      // Token Type
+            }
+
+        - After Base64URL Encoding    
+        - eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9
+
+
+    Payload:
+        - Contains the claims/ information
+
+        Example: 
+        {
+            "userId": 101,
+            "name": "Kishore",
+            "role": "Admin"
+        }
+
+        - Common claims
+            - sub   - subject
+            - iss   - issuer
+            - aud   - Audience
+            - exp   - Expiration time 
+            - iat   - Issued at 
+            - nbf   - not valid before
+            - jti   - JWT id
+
+
+    Signature:
+        - The signature ensures the token has not been altered.
+
+        Example: 
+            HMACSHA256(
+                base64Url(header) + "." + base64Url(payload),
+                SECRET_KEY
+            )
+
+
+Signing Algorithms:
+
+    - HS256 
+    - HS512 
+    - RS256 
+    - ES256
+
+JWT Validation Steps:
+
+    - Reads the token 
+    - Verifies the signature 
+    - Checks the expiration  (exp)
+    - Validates the issuer   (iss), if applicable
+    - Validates the audience (aud), if applicable 
+    - Extracts the claims 
+    - Authrozies access based on roles or permissions    
+
+

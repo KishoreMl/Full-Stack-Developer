@@ -1,0 +1,15 @@
+
+Open Authentication (OAuth):
+
+    OAuth (Open Authorization) is an authorization framework that allows an application to access a user's 
+    resources on another service without the user giving the application their password.
+
+    Example: 
+        - Sign in with Google
+        - The application doesn't need your Google password. Instead Google authenticates you and gives the 
+           application an access token that grants limited access. 
+
+
+OAuth vs JWT:
+
+

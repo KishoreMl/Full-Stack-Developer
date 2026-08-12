@@ -1,0 +1,10 @@
+JDK:
+
+
+JVM:
+
+ It is an abstract machine that provides the runtime environment in which Java bytecode can be executed.
+
+JRE:
+
+The JRE is a software package that contains everything required to run a Java program

@@ -1,0 +1,4 @@
+1. Which data structure is used to DFS?
+    - Stack 
+
+2. 
