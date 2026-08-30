@@ -18,7 +18,7 @@ Frontend:
         - Authentication     : Partial 
         - Authorization      : Partial
         - JWT                : Done 
-        - OAuth              : 
+        - OAuth              : Done 
         - REST API           : Partial
         - HTTP Protocol      : Done 
         - Web Sockets        : 
@@ -37,14 +37,14 @@ Frontend:
         - Arrow funtions     : 
 
     React JS:
-        - React Lifecycle                     :
-        - Virtual DOM                         :
-        - Reconcilation                       :
+        - React Lifecycle                     : Partial 
+        - Virtual DOM                         : Partial 
+        - Reconcilation                       : Partial 
         - Fibre Architecture (High Level)     :
         - State Management                    :
         - Class Component vs Func Component   :
-        - Hooks                               :
-        - Redux                               :
+        - Hooks                               : Partial 
+        - Redux                               : 
         - Thunk                               :
         - Routing                             :
         - Lazy Loading                        :
@@ -65,10 +65,10 @@ Backend:
         - SOLID Principles      : Done
 
     Java:
-        - JVM, JDK, JRE         :
-        - JIT Compiler          :
-        - Garbage Collector     :
-        - OOPS Concept          :
+        - JVM, JDK, JRE         : Partial 
+        - JIT Compiler          : Partial 
+        - Garbage Collector     : Partial 
+        - OOPS Concept          : Partial
         - String Builder        :
         - String Buffer         :
         - Collections           :
@@ -122,6 +122,8 @@ Cloud:
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 AI & Gen AI
+
+    
 
 
 

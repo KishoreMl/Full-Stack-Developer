@@ -1,0 +1,71 @@
+CORS - Cross Origin Resource Sharing 
+
+    It is a brower security mechanism that controls whether a web application running on one origin 
+    can access resources from another origin.
+
+Origin:
+    - Protocol + Host + Port 
+    - Example: https://example.com:4566
+
+CORS Headers : 
+    - Access-Control-Allow-Origin       (https://example.com)
+    - Access-Control-Allow-Methods      (GET,POST,PUT)
+    - Access-COntrol-Allow-Headers      (Authorization, Content-Type) 
+    - Access-Control-Allow-Credentials  (controls whether credentials such as cookies can be included in cross-origin requests) 
+
+
+Explanation:
+
+    - If Frontend application runs on origin (https://clientapp.com)
+    - which sends request to backend application which runs on origin (https://backendapp.com)
+    - which might return 
+        HTTP/1.1 200 OK
+        Content-Type: application/json
+    - if the response headers does not contain proper CORS headers, browser will block frontend application from reading the response.
+       Access to fetch at 'https://backendapp.com/api/users'
+       from origin 'https://clientapp.com'
+       has been blocked by CORS policy   
+
+    - To overcome it the backend application should add the Header to it response 
+        Access-Control-Allow-Origin: https://clientapp.com
+  
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Preflight request: 
+
+    - A preflight request is a automatic HTTP request that a web browser sends before an actual request, 
+    it needs to check whether the target server allows a cross-origin request.
+
+    - It makes OPTIONS method api call to get the list allowed items for the client application. 
+    - It does not need bearer token for the preflight API call.
+    
+fetch("https://api.example.com/users", {
+    method: "POST",
+    headers: {
+        "Authorization": "Bearer token",
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        name: "Kishore"
+    })
+});
+
+- This request may require preflight becuase of things such as method/headers/content type
+
+- The browser first sends 
+
+    OPTIONS /users HTTP/1.1
+    Origin: https://app.example.com
+    Access-Control-Request-Method: POST
+    Access-Control-Request-Headers: authorization, content-type
+
+    - This is a preflight request 
+    
+- Then the server responds to the preflight 
+
+    HTTP/1.1 204 No Content
+    Access-Control-Allow-Origin: https://app.example.com
+    Access-Control-Allow-Methods: GET, POST, PUT, DELETE
+    Access-Control-Allow-Headers: Authorization, Content-Type
+
+- The browser checks the reponse, if everything is allowed, then it makes the actual API call

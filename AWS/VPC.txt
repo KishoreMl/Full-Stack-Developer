@@ -3,7 +3,5 @@ Virtual Private Cloud:
     - A VPC is a isolated virtual network in AWS 
     - 
 
-
-
 - ASG 
 - Deployments 

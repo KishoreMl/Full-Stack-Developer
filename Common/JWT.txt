@@ -73,3 +73,12 @@ JWT Validation Steps:
     - Authrozies access based on roles or permissions    
 
 
+Access Token vs Refresh Token 
+
+Access Token: 
+    - Used to access APIs 
+    - Short lived 
+
+Refresh Token:
+    - Used to get new access Token 
+    - Long lived 
