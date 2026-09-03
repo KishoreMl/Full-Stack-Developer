@@ -6,6 +6,7 @@ SOLID Principles:
 4. Interface Segregation Principle
 5. Dependency Inversion Principle
 
+------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Single Responsibilty Principle:
 
@@ -59,40 +60,78 @@ Open/Closed Principle:
 
     - A Class should be open for extension but closed for modification.
     - You should be able to add new functionality without modifying existing code.
+    - We achieve this commonly through interfaces, abstract classes, polymorphism, and composition.
     
     Bad Example: 
 
-        class DiscountCalculator {
+        class PaymentService {
 
-            double calculate(String customerType) {
-                if(customerType.equals("REGULAR"))
-                    return 10;
-                if(customerType.equals("PREMIUM"))
-                    return 20;
+            void pay(String paymentType) {
 
-                return 0;
+                if (paymentType.equals("CREDIT_CARD")) {
+                    System.out.println("Processing credit card payment");
+                }
+                else if (paymentType.equals("PAYPAL")) {
+                    System.out.println("Processing PayPal payment");
+                }
             }
         }
 
-    - Adding a new customer type means modifying existing code.
+    - Adding a new payment type means modifying existing code.
 
     Good Example:
 
-        interface DiscountStrategy {
-            double getDiscount();
+        // Create an Interface 
+
+        interface Payment {
+            void pay();
         }
 
-        class RegularCustomer implements DiscountStrategy {
-            public double getDiscount() {
-                return 10;
+        // Then create implementations
+
+        class CreditCardPayment implements Payment {
+
+            @Override
+            public void pay() {
+                System.out.println("Processing credit card payment");
             }
         }
 
-        class PremiumCustomer implements DiscountStrategy {
-            public double getDiscount() {
-                return 20;
+        class PayPalPayment implements Payment {
+
+            @Override
+            public void pay() {
+                System.out.println("Processing PayPal payment");
             }
         }
+
+        class UPIPayment implements Payment {
+
+            @Override
+            public void pay() {
+                System.out.println("Processing UPI payment");
+            }
+        }
+
+        // Now the service doesn't care about specific payment type    
+
+        class PaymentService {
+
+            void processPayment(Payment payment) {
+                payment.pay();
+            }
+        }
+
+
+        Real World Example: 
+
+        Notification
+            ↑
+        ┌───┼────┬──────┐
+        Email SMS  Push   WhatsApp
+
+        - If your application already supports Email and SMS, adding WhatsApp should ideally mean adding a new WhatsAppNotification implementation, 
+        rather than modifying a large NotificationService with another if/else.
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -103,17 +142,35 @@ Liskov's Substitution Principle:
     
     Bad Example: 
 
-    class Bird {
-        void fly() {}
-    }
-
-    class Penguin extends Bird {
-        void fly() {
-            throw new UnsupportedOperationException();
+        class Bird {
+            void fly() {}
         }
-    }
 
-    // Penguin is a bird that canot fly. This breaks expectations
+        class Sparrow extends Bird {
+
+            @Override
+            void fly() {
+                System.out.println("Sparrow is flying");
+            }
+        }
+
+        class Penguin extends Bird {
+
+            void fly() {
+                throw new UnsupportedOperationException();
+            }
+        }
+
+        // Now consider 
+
+        void makeBirdFly(Bird bird) {
+            bird.fly();
+        }
+
+        makeBirdFly(new Sparrow());  // Works ✅
+        makeBirdFly(new Penguin());  // Exception ❌
+
+        // Penguin is a bird that canot fly. This breaks expectations as it cannot be used as substitute for Bird class (Parent class)
 
     Good Example:
 
@@ -129,22 +186,33 @@ Liskov's Substitution Principle:
 
         class Penguin extends Bird {}
 
+        void makeBirdFly(Bird bird) {
+            bird.fly();
+        }
+
+        makeBirdFly(new Sparrow());  // Works ✅
+        makeBirdFly(new Penguin()); // will not compile
+
+        // This is better because the type system itself prevents invalid behavior.
+
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Interface Segregation Principle:
 
-    - Do not force any client to implement an interface which is irrelevant to them
-    - You should prefer many client interfaces rather than one general interface and each interface should have a specific responsibility.
+    - Do not force any client to implement methods of an interface which is irrelevant to them
+    - Instead of creating one large interface, create smaller, focused interfaces.
 
     Bad Example:
 
         interface Worker {
             void work();
             void eat();
+            void sleep();
         }
         
-        // Robot Workers do not eat
+        // Robot Workers do not eat or sleep
+
         class Robot implements Worker {
             public void work() {}
 
@@ -163,53 +231,150 @@ Interface Segregation Principle:
             void eat();
         }
 
-        class Human implements Workable, Eatable {}
+        interface Sleepable{
+            void sleep()
+        }
+
+        class Human implements Workable, Eatable, Sleepable {}
 
         class Robot implements Workable {}
+
+    Another Example:
+
+        interface Printer {
+            void print();
+            void scan();
+            void fax();
+        }    
+
+        class BasicPrinter implements Printer{
+
+            public void print(){
+                System.out.println("Printing..")
+            }
+
+            public void scan() {
+                // Not supported
+            }
+
+            public void fax(){
+                // Not supported
+            }
+
+        }    
+
+        // Here the class is forced to implement the scan & fax methods
+
+        Better Design: 
+
+        interface Printable{
+            void print()
+        }
+        
+        interface Scanable{
+            void scan()
+        }
+
+        interface Faxable{
+            void fax()
+        }
+
+        class BasicPrinter implements Printable{
+            
+            public void print(){
+                System.out.println("Printing..")
+            }
+        }
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 Dependency Inversion Principle:
 
-    -  “High-level modules should not depend on low-level modules. Both should depend on abstractions“. 
-    -  Depend on abstractions, not concrete implementations.
+    -  High-level modules should not depend on low-level modules. Both should depend on abstractions. 
+    -  Abstractions should not depend on details. Details should depend on abstractions.
 
     - Bad Example
+
+        // Let us consider that we have a OrderService that sends email
     
-        class MySQLDatabase {
-            void save() {}
-        }
-
-        class UserService {
-            private MySQLDatabase db = new MySQLDatabase();
-        }
-
-        // User Service is tightly coupled to MySql services
-
-    - Good Example 
-
-        interface Database {
-            void save();
-        }
-
-        class MySQLDatabase implements Database {
-            public void save() {}
-        }
-
-        class PostgreSQLDatabase implements Database {
-            public void save() {}
-        }
-
-        class UserService {
-            private Database db;
-
-            UserService(Database db) {
-                this.db = db;
+        class EmailService {
+            void sendEmail(String message) {
+                System.out.println("Sending Email: " + message);
             }
         }
 
-        new UserService(new MySQLDatabase());
-        new UserService(new PostgreSQLDatabase());
+        // Order Service directly depends on EmailService
+
+        class OrderService {
+
+            private EmailService emailService;
+
+            OrderService() {
+                emailService = new EmailService();
+            }
+
+            void placeOrder() {
+                System.out.println("Order placed");
+
+                emailService.sendEmail("Your order has been placed");
+            }
+        }
+
+        // If tomorrow we want to send an SMS instead of Email we have to modify the Order Service.
+        // As the order service is tightly coupled to the concrete Implementation.
+
+    - Good Example 
+
+        // Instead of making OrderService depend directly on EmailService, create an abstraction.
+
+        interface NotificationService {
+            void sendNotification(String message);
+        }
+
+        // Now Email Service implements abstraction
+
+        class EmailService implements NotificationService {
+
+            @Override
+            public void send(String message) {
+                System.out.println("Sending Email: " + message);
+            }
+        }
+
+        class SMSService implements NotificationService {
+
+            @Override
+            public void send(String message) {
+                System.out.println("Sending SMS: " + message);
+            }
+        }
+
+        // Now OrderService depends on the interface, not the concrete class
+
+        class OrderService {
+
+            private NotificationService notificationService;
+
+            OrderService(NotificationService notificationService){
+                this.notificationService = notificationService 
+            }
+
+            public placeOrder(){
+
+                // Place order logic implementation
+
+                notificationService.send("Your order has been placed");
+
+            }
+        }
+
+        // Now we can inject whichever implementation we want
+
+        EmailService email = new EmailService();
+        OrderService orderService = new OrderService(email);
+
+        SMSService sms = new SMSServcie();
+        OrderService orderService = new OrderService(sms); 
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 

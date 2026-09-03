@@ -103,11 +103,11 @@ Common HTTP Headers:
 
         Easy ways to remember:
 
-        - Authorization : Here is my authentication token   
-        - Content-Type  : The data im sending to you is JSON 
-        - Accept        : I want the response as JSON
-        - Cache-Control : Don't blindly reuse a cached response; follow the caching rules  
-        - User Agent    : I'm a browser/client with this software and platform information
+            - Authorization : Here is my authentication token   
+            - Content-Type  : The data im sending to you is JSON 
+            - Accept        : I want the response as JSON
+            - Cache-Control : Don't blindly reuse a cached response; follow the caching rules  
+            - User Agent    : I'm a browser/client with this software and platform information
 
     Response Headers:
 
@@ -141,8 +141,3 @@ Common HTTP Headers:
             - Set-Cookie                  :  Store/update this cookie
             - Cache-Control               :  How should you cache this response?
             - Access-Control-Allow-Origin :  Which origin can access this response?    
-
-
-
-
-
