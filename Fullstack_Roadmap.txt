@@ -65,8 +65,8 @@ Backend:
     Java:
         - JVM, JDK, JRE         : Partial 
         - JIT Compiler          : Partial 
-        - Garbage Collector     : Partial 
-        - OOPS Concept          : Partial
+        - Garbage Collector     : Done
+        - OOPS Concept          : Done
         - String Builder        :
         - String Buffer         :
         - Collections           :
@@ -102,6 +102,7 @@ Backend:
         - Joins                : 
         - Indexing             :
         - Query Optimization   :
+
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------
 

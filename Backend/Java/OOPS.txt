@@ -1,0 +1,254 @@
+Object Oriented Programming (OOPS):
+
+Class & Objects
+    - A Class is a blueprint or template for creating objects.
+    - An object is an actual instance of a class 
+    - Syntax:
+        ClassName objectName = new ClassName();
+
+Four main pillers of OOPS are 
+    - Encapsulation
+    - Inheritance 
+    - Polymorphism 
+    - Abstraction 
+
+1. Encapsulation:
+    - Bundling Data & Methods together and controlling direct access to the Data. 
+    - We achieve this using 
+        - private fields 
+        - public methods 
+        - getter/setter 
+        - Validation/business rules 
+
+    Example: 
+
+        class User {
+
+            private String name;
+
+            public String getName(){
+                return name;
+            }
+
+            public void setName(String name){
+                name = name;
+            }
+        } 
+
+        User user = new User()
+
+        user.setName("Kishore");
+
+        System.out.prinltn(user.getName()); // Kishore    
+
+        user.name // is not allowed
+
+
+2. Inheritance:
+    - Inheritance allows one class to acquire properties & behavior from another class.
+
+    Example:
+        class Animal {
+
+            void eat(){
+                System.out.println("Animal is eating");
+            }
+        }
+
+        class Dog extends Animal{
+
+            void bark(){
+                System.out.println("Dog is barking");
+            }
+        }
+
+        // Here Dog extends the class Animal and the object of class Dog can access the methods & fields of Animal class.
+
+        Dog dog =  new Dog();
+
+        dog.eat();  // inherited method
+        dog.bark(); // own method
+
+
+3. Polymorphism:
+
+    - The ability of function or method to take multiple forms and behave differently based on object or context.
+    - One interface multiple possible behaviors.
+
+    - There two major types of polymorphism 
+        1. compile time polymorphism
+        2. run time polymorphism
+
+    Compile time polymorphism:
+        - It is achieved through method overloading.
+        - In method overriding method name remains same but no of parameters differ.
+
+        class Payment{
+
+            void pay(int amount){
+                System.out.println("Paid using cash:"+ amount);
+            }
+
+            void pay(double amount, String cardNumber){
+                System.out.println("Paid using card:"+ amount);
+            }
+
+            void pay(String upiId, double amount){
+                System.out.println("Paid using upi:"+ amount);
+            }
+        }
+
+        Payment payment = new Payment();
+
+        payment.pay(100);
+        payment.pay(100000, "12345678");
+        payment.pay("kishore@sbi", 1000);
+
+    Run time polymorphism:
+        - It is achieved through method overriding. 
+
+        Example:
+
+            class Employee {
+                void calculateSalary(){
+                    System.out.println("Calculate basic Salary");
+                }
+            }
+
+            class Manager extends Employee{
+
+                @Override
+                void calculateSalary(){
+                    System.out.println("Calculate Salary with bonus");
+                }
+            }
+
+            class Developer extends Employee {
+
+                @Override
+                void calculateSalary(){
+                    System.out.println("Calculate Salary with incentives");
+                }
+            }
+
+            public class Main {
+
+                public static void main(String[] args){
+
+                    Employee emp;
+
+                    emp = new Manager();
+                    emp.calculateSalary();
+
+                    emp = new Developer();
+                    emp.calculateSalary();
+                }
+            }
+
+            Every employee has salary calculation method, salary calculation logic differs for Manager & Developer
+
+4. Abstraction:
+    - Abstraction means exposing only essential behaviours while hiding implementation details.
+
+    - car.start() // When you use this method, you don't need to know everything happening inside.
+
+    Example:
+
+    interface payment {
+
+        void pay(double amount);
+    }
+
+    class CreditCardPayment implements Payment{
+
+        @Override
+        public void pay(double amount){
+            System.out.println("Processing credit card payment");
+        }
+    }
+
+    class UPIPayment implements Payment{
+
+        @Override
+        public void pay(double amount){
+            System.out.println("Processing upi payment");
+        }
+    }
+
+    // The caller only needs to know
+
+    Payment payment = new UPIPayment();
+
+    payment.pay(1000);
+
+    // It does not need to know the internal UPI implemnatation
+
+
+Association:
+    Association represents a general relationship between two objects. 
+
+    Example: 
+        Teacher ───────── Student
+
+        // Teacher teaches student, and student learns from the teacher 
+
+        class Teacher {
+        }
+
+        class Student {
+        }
+
+        They can exist independently.
+
+
+Aggregation: 
+    Aggregation is a HAS-A relationship where the contained objects can exits independently.
+
+    Department
+        |
+        | has
+        ↓
+    Employees
+
+    class Employees{
+
+    }
+
+    class Department{
+
+        private List<Employee> employees;
+
+        Department(List<Employee> employees){
+            this.employees = employees;
+        }
+    }
+
+    // if the Department is deleted the employees can still exist.
+
+Composition: 
+    Composition is a stronger HAS-A relationship. 
+
+    The contained object's lifecycle is strongly tied to the owner. 
+
+    Example: 
+        House
+        |
+        └── Room
+
+     // A House is composed of rooms 
+
+    class Room{
+
+    }
+
+    class House{
+
+        private Room room;
+
+        House(){
+            room = new Room();
+        }
+    } 
+
+    // The House creates and owns the Room.
+

@@ -1,0 +1,54 @@
+Garbage Collection:
+     Garbage Collection is a automatic memory management in Java that identifies and removes objects that 
+     are no longer been used by application, freeing memory for new objects.
+
+Why Garbage Collection is needed?
+     - In Java when an object is created, it is stored in Heap memory
+     - The object remains in the memory as long as it is reachable through a reference.
+     - When an object is no-longer reachable, it eligible for garbage collection.
+
+How Garbage Collection works?
+     - Garbage Collector periodically finds objects that are still reachable 
+     - Identifies unreachable objects
+     - Reclaims memory occupied by unreachable objects.
+
+Heap Memory Structure:
+     Java Heap memory is divided into generations:
+
+     - Young generation  : New objects are created here
+     - Old generation    : Old Objects that survive multiple GC cycles are promoted here.
+
+Types of Garbage Collection:
+
+     - Minor GC  : Happens in young generation 
+     - Major GC  : Happens in old generation
+     - Full GC   : Happens in both 
+
+Types of Grabage Collectors:
+
+     - Serial     GC : Single threaded collector
+     - Parallel   GC : Multi threaded collector
+     - G1         GC : Default in Modern Java
+     - Z          GC : Suitable for high performance applications
+     - Shenandoah GC : Concurrent collection
+
+Garbage Collection Roots: 
+     Static references are GC roots 
+          - Active Thread stacks
+          - Local Variables 
+          - Static fields
+          - JNI references 
+
+Garbage collection algorithm:
+
+     - Mark and Sweep algorithm : a fundamental GC algorithm
+
+     1. Mark  - mark all reachable objects 
+     2. Sweep - Remove all unreachable objects
+
+Requesting Garbage Collection:
+     - We can suggest JVM to run GC (e.g., System.gc();)
+     - But that does not guarantee that GC will run immediately
+     - JVM decides when to execute it
+     - Also we cannot force Garbage collection
+
