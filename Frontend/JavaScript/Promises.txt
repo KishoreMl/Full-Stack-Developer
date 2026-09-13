@@ -1,4 +1,350 @@
- Promises:
+Promises:
 
+    A Promise is an object that represents eventual result of an asynchronous operation.
+    In Simple terms: 
+        - Promise is a Placeholder for a value that you dont have right now, but you expect it get it in future.
+
+Promises are heavily used with:
+    - fetch()
+    - API Calls 
+    - Timers 
+    - File operations
+    - Database operations 
+    - React applications
+    - Async / await
+
+
+Why do we need Promises?
+    Javascript executes code synchronously by default. But while making an API request,  the server might 
+    take time that varies. So JavaScript should not freeze entire application while waiting.
+
+    JavaScript
+        │
+        │ Start API request
+        ▼
+    Server
+        │
+        │ ... processing ...
+        │
+        │
+    JavaScript continues executing
+        │
+        ▼
+    Other code executes
+        │
+        │
+        ▼
+    Server response arrives
+        │
+        ▼
+    Handle response
+
+Promises provide a clean way to handle that future result.
+
+
+Promises States:
+    - Pending     : operation is still running 
+    - Fullfilled  : operation completed successfully 
+    - Rejected    : operation failed
+
+
+Creating a Promise: 
+
+    const promise = new Promise ((resolve, reject) => {
+
+        // asynchronous operartion
+
+    })
+
+    - resolve() indicates success 
+    - reject () indicates failure
+
+    Example: 
+        const promise = new Promise((resolve, reject) => {
+
+            const success = true;
+
+            if (success) {
+                resolve("Data received"); // Value to returned if succeded 
+            } else {
+                reject("Request failed");  // Value to returned if failed
+            }
+
+        });
+
+    - Very Important: resolve() doesn't mean "Return"
+    - Consider
+        const promise = new Promise((resolve, reject) => {
+            resolve("Hello");
+            console.log("After resolve");
+        });
+
+        Output: 
+            After resolve
+
+    - resolve() settles the Promise, but it does not stop executer function. 
+
+    - if you want to stop the execution after promise, use
+        ` return resolve("Done")`
+
+    Example :
+        const promise = new Promise((resolve, reject) => {
+            if (true) {
+                resolve("Success");
+                return;
+            }
+            console.log("This won't execute");
+        });
+
+
+Usage of `.then()` & `.catch()` in handling promises:
+
+    - `.then()` is used to handle successfull results.
+    - `.catch()` is used to handle rejected promises.
+
+    Example:
+        promise.then((result) => {
+                console.log(result);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    
+    - `.finally()` runs regardless of whether the promise succeeds or fails
+
+    Example: 
+            promise
+                .then((result) => {
+                    console.log(result);
+                })
+                .catch((error) => {
+                    console.error(error);
+                })
+                .finally(() => {
+                    console.log("Operation completed");
+                });
+    
+    - A common usecase is loading indicator
+
+        setLoading(true);
+
+        fetchUsers()
+            .then((users) => {
+                setUsers(users);
+            })
+            .catch((error) => {
+                setError(error);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+
+    Real Time example: 
+
+        fetch("/api/users")
+            .then((response) =>{
+                return response.json();
+            })
+            .then((data) =>{
+                console.log(data);
+            })
+            .catch((error) => {
+                console.log(error);
+            }) 
+
+    Why there are two `.then()` calls?
+
+    - response.json() also returns a Promise
+    - Also whenever `.then()` returns a value, it returns a promise
+    - This is called Promise chaining. The result of one `.then()` can become the input to the next `.then()`.
+
+    Example: 
+        Promise.resolve(10)
+            .then((value) => {
+                return value * 2;
+            })
+            .then((value) => {
+                console.log(value);
+            });       
+
+
+async / await :
+    
+    - Promises can also be consumed using async/await.
+    - async/await is syntax built on top of Promises.
+
+    Example:
+        async function getUsers() {
+            try{
+                const response  =  await fetch("/api/users");
+                const usersData =  await response.data();
+                console.log(data);
+            }
+            catch(error){
+                console.log(error);
+            }
+        }
+
+
+    - Important: async always returns a promise
+
+    - Example:
+            async function getNumber(){
+                return 10;    // eventhough you return 10
+            }
+
+            // The function actually returns Promise<number>
+
+            - So async fucntions can be consumed like this
+
+                getNumber().then((num) =>{
+                    console.log(num);
+                })   
+                   
+                       or
+
+                const num = await getNumber();
+
+
+    - `await` does not block the entire JavaScript thread 
+
+    - Consider:
+            async function getData() {
+                console.log("Start");
+                const response = await fetch("/api/users");
+                console.log("Response received");
+            }
+
+            getData();
+
+            console.log("Other code");     
+
+        Output:
+            - Start 
+            - Other code
+            - Response received
+
+        - so await pauses only the async fucntion's flow, not entire JavaScript runtime
+
+Promise combinators:
+
+    - Promise.all()           : wait for all; rejects if one rejects
+    - Promise.allSettled()    : wait for all regardless of success or failure
+    - Promise.race()          : first Promise to settle (success or fail) wins  
+    - Promise.any()           : first fullfilled promise wins
+
+    1. Promise.all()
+
+        - If we need to make three independent API calls, also need to wait for all of them, we can use Promise.all().
+        - Example:
+            const users = getUsers();
+            const projects = getProjects();
+            const issues = getIssues();
+
+            const results = await Promise.all([uses,projects,issues]);
+
+        - Promise.all() reolves or fullfills only if all the promises are resolved.
+        - if one promise rejects, Promise.all() rejects   
+
+    2. Promise.allSettled()
+
+        - It is similar to Promise.all(), where Promise.all() imediately rejects if anyone of the Promise fails.
+        Where as the Promise.allSettled() waits for all the Promise to complete (either succeed or fail).
+
+        Example:
+            const results = await Promise.allSettled([
+                getUsers(),
+                getProjects(),
+                getIssues()
+            ]);    
+
+    3. Promise.race()
+
+        - Returns the result of promise which settles first (succeded or fail). 
+        - Example: 
+                const result = await Promise.race([
+                    fetch("/api/server1"),
+                    fetch("/api/server2")
+                ]);
+
+                Server 1 ──────── 800ms ──┐
+                           │
+                Server 2 ─── 300ms ────────┼──→ Promise.race()
+                                        │
+                                        ▼
+                                    Result
+
+                Server 2 wins because it settled first.
+
+    4. Promise.any()
+
+        - It returns the first fullfilled Promise.
+        - Example: 
+                const result = await Promise.any([
+                    fetch("/server1"),
+                    fetch("/server2"),
+                    fetch("/server3")
+                ]);                              
+
+        - If promises reject, Promise.any() rejects with an AggegrateError.
+
+
+Promises and Event loop:
+
+    Example:
+        console.log("A");
+
+        Promise.resolve().then(() => {
+            console.log("B");
+        });
+
+        console.log("C");
+
+    Ouptut: 
+        - A C B 
+
+    Explanation:
+        - the `.then()` callback is placed in the microtask queue.
+
+        Call Stack
+            │
+            ├── console.log("A")
+            │
+            ├── Promise.then()
+            │       ↓
+            │   Microtask Queue
+            │
+            └── console.log("C")
+                    │
+                    ▼
+            Call Stack empty
+                    │
+                    ▼
+            Microtask Queue
+                    │
+                    ▼
+                console.log("B")        
+
+
+Promise Error handling:
+    - .catch() is used to handle errors.
+    - An error or rejection can propogate down the chain untill rejection handler handles it.
+
+    Example:
+        getUser()
+            .then(user => getProjects(user.id))
+            .then(projects => getIssues(projects))
+            .catch(error => {
+                console.error(error);
+            });
+
+          ---- or ----
+
+        try {
+            const user = await getUser();
+            const projects = await getProjects(user.id);
+        } catch (error) {
+            console.error(error);
+        }     
 
 

@@ -27,8 +27,8 @@ Frontend:
         - Browser Caching    : 
 
     JavaScript:
-        - Promises           : 
-        - async/await        :
+        - Promises           : Done
+        - async/await        : Done
         - Scope & Closures   :
         - this Keyword       :
         - bind               :
