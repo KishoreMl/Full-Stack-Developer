@@ -1,0 +1,67 @@
+Docker: 
+    The basic idea of docker is package the application together with the environment it needs, so it can run consistently elsewhere.
+
+
+    - Docker file      : a text file containing instructions for creating a Docker image.
+    - Docker Image     : a packaged blueprint of your application
+    - Docker container : a running instance created from that blueprint
+
+    Mental model:
+    - Docker image     : similar to class
+    - Docker container : similar to object created from the class
+
+
+    Example docker file:
+        
+       `FROM eclipse-temurin:21-jre
+        WORKDIR /app
+        COPY target/myapp.jar app.jar
+        EXPOSE 8080
+        ENTRYPOINT ["java", "-jar", "app.jar"]`
+
+
+
+
+Flow: 
+
+    Java source code
+      ↓
+    Maven / Gradle build
+        ↓
+        JAR
+        ↓
+    Dockerfile
+        ↓
+    docker build
+        ↓
+    Docker Image
+        ↓
+    docker run
+        ↓
+    Docker Container
+        ↓
+    Java application running
+
+
+Mental Model: 
+                    Dockerfile
+                         │
+                         │ docker build
+                         ▼
+                 ┌───────────────┐
+                 │     IMAGE     │
+                 │               │
+                 │ Java runtime  │
+                 │ JAR           │
+                 │ dependencies  │
+                 └───────┬───────┘
+                         │
+                    docker run
+                         │
+              ┌──────────┼──────────┐
+              ▼          ▼          ▼
+         Container    Container   Container
+              │          │          │
+              ▼          ▼          ▼
+           Java app   Java app   Java app
+
