@@ -10,7 +10,6 @@ Docker:
     - Docker image     : similar to class
     - Docker container : similar to object created from the class
 
-
     Example docker file:
         
        `FROM eclipse-temurin:21-jre
@@ -20,15 +19,13 @@ Docker:
         ENTRYPOINT ["java", "-jar", "app.jar"]`
 
 
-
-
 Flow: 
 
     Java source code
-      ↓
+        ↓
     Maven / Gradle build
         ↓
-        JAR
+       JAR
         ↓
     Dockerfile
         ↓
